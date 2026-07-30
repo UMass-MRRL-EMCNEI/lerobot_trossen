@@ -10,6 +10,9 @@ class WidowXAILeaderTeleopConfig(TeleoperatorConfig):
     # IP address of the arm
     ip_address: str
 
+    # Optional YAML config file for the arm
+    config_file: str | None = None
+
     # Joint names for the WidowX AI leader arm
     joint_names: list[str] = field(
         default_factory=lambda: [

@@ -11,6 +11,10 @@ class BiWidowXAIFollowerRobotConfig(RobotConfig):
     left_arm_ip_address: str
     right_arm_ip_address: str
 
+    # Config files for the arms
+    right_arm_config_file: str | None = None
+    left_arm_config_file: str | None = None
+
     # `max_relative_target` limits the magnitude of the relative positional target vector for
     # safety purposes. Set this to a positive scalar to have the same value for all motors, or a
     # list that is the same length as the number of motors in your follower arms.

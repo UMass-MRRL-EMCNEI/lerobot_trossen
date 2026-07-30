@@ -8,3 +8,5 @@ from lerobot.teleoperators.config import TeleoperatorConfig
 class BiWidowXAILeaderRobotConfig(TeleoperatorConfig):
     left_arm_ip_address: str
     right_arm_ip_address: str
+    left_arm_config_file: str | None = None
+    right_arm_config_file: str | None = None

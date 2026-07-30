@@ -30,6 +30,7 @@ class BiWidowXAIFollowerRobot(Robot):
         left_arm_config = WidowXAIFollowerConfig(
             id=f"{config.id}_left" if config.id else None,
             ip_address=config.left_arm_ip_address,
+            config_file=config.left_arm_config_file,
             max_relative_target=config.left_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,
             loop_rate=config.loop_rate,
@@ -42,6 +43,7 @@ class BiWidowXAIFollowerRobot(Robot):
         right_arm_config = WidowXAIFollowerConfig(
             id=f"{config.id}_right" if config.id else None,
             ip_address=config.right_arm_ip_address,
+            config_file=config.right_arm_config_file,
             max_relative_target=config.right_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,
             loop_rate=config.loop_rate,

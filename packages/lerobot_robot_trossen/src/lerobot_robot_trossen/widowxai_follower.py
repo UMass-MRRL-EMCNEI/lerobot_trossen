@@ -1,6 +1,7 @@
 import logging
 import time
 from typing import Any
+from pathlib import Path
 
 import trossen_arm
 from lerobot.cameras.utils import make_cameras_from_configs
@@ -12,6 +13,7 @@ from lerobot_robot_trossen.config_widowxai_follower import WidowXAIFollowerConfi
 
 logger = logging.getLogger(__name__)
 
+config_dir = Path("/home/trossen-ai/mobileai-lerobot/arm_configs")
 
 class WidowXAIFollower(Robot):
     """
@@ -93,6 +95,7 @@ class WidowXAIFollower(Robot):
         for cam in self.cameras.values():
             cam.connect()
 
+        self.configure_from_yaml(self.config.config_file)
         self.configure()
         logger.info(f"{self} connected.")
 
@@ -105,6 +108,16 @@ class WidowXAIFollower(Robot):
         # Trossen Arm robots do not require calibration
         pass
 
+    def configure_from_yaml(self, config_file: str) -> None:
+        # Load arm configuration from a YAML file
+        config_path = config_dir / config_file
+        try:
+            self.driver.load_configs_from_file(str(config_path))
+            logger.info(f"{self} loaded configuration from {config_file}.")
+        except Exception as e:
+            logger.error(f"Failed to load configuration from {config_file}: {e}")
+            raise
+    
     def configure(self) -> None:
         # Set the arm to position control mode
         self.driver.set_all_modes(trossen_arm.Mode.position)

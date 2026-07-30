@@ -11,6 +11,9 @@ class WidowXAIFollowerConfig(RobotConfig):
     # IP address of the arm
     ip_address: str
 
+    # Optional YAML config file for the arm
+    config_file: str | None = None
+
     # `max_relative_target` limits the magnitude of the relative positional target vector for
     # safety purposes. Set this to a positive scalar to have the same value for all motors, or a
     # list that is the same length as the number of motors in your follower arms.

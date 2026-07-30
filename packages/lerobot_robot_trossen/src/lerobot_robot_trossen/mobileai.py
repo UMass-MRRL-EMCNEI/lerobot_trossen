@@ -39,6 +39,8 @@ class MobileAIRobot(Robot):
         arms_config = BiWidowXAIFollowerRobotConfig(
             left_arm_ip_address=config.left_arm_ip_address,
             right_arm_ip_address=config.right_arm_ip_address,
+            left_arm_config_file=config.left_arm_config_file,
+            right_arm_config_file=config.right_arm_config_file,
             left_arm_max_relative_target=config.left_arm_max_relative_target,
             right_arm_max_relative_target=config.right_arm_max_relative_target,
             min_time_to_move_multiplier=config.min_time_to_move_multiplier,

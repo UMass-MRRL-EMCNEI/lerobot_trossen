@@ -29,11 +29,13 @@ class BiWidowXAILeaderRobot(Teleoperator):
         left_arm_config = WidowXAILeaderTeleopConfig(
             id=f"{config.id}_left" if config.id else None,
             ip_address=config.left_arm_ip_address,
+            config_file=config.left_arm_config_file,
         )
 
         right_arm_config = WidowXAILeaderTeleopConfig(
             id=f"{config.id}_right" if config.id else None,
             ip_address=config.right_arm_ip_address,
+            config_file=config.right_arm_config_file,
         )
 
         self.left_arm = WidowXAILeaderTeleop(left_arm_config)

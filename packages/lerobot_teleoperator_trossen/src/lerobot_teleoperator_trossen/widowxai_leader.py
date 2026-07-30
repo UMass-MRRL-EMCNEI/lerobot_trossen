@@ -1,5 +1,6 @@
 import logging
 import time
+from pathlib import Path
 
 import trossen_arm
 from lerobot.utils.errors import DeviceAlreadyConnectedError, DeviceNotConnectedError
@@ -11,6 +12,7 @@ from lerobot_teleoperator_trossen.config_widowxai_leader import (
 
 logger = logging.getLogger(__name__)
 
+config_dir = Path("/home/trossen-ai/mobileai-lerobot/arm_configs")
 
 class WidowXAILeaderTeleop(Teleoperator):
     """
@@ -52,6 +54,7 @@ class WidowXAILeaderTeleop(Teleoperator):
         if not self.is_calibrated and calibrate:
             self.calibrate()
 
+        self.configure_from_yaml(self.config.config_file)
         self.configure()
         logger.info(f"{self} connected.")
 
@@ -59,6 +62,16 @@ class WidowXAILeaderTeleop(Teleoperator):
     def is_calibrated(self) -> bool:
         # Trossen Arm robots do not require calibration
         return True
+    
+    def configure_from_yaml(self, config_file: str) -> None:
+        # Load arm configuration from a YAML file
+        config_path = config_dir / config_file
+        try:
+            self.driver.load_configs_from_file(str(config_path))
+            logger.info(f"{self} loaded configuration from {config_file}.")
+        except Exception as e:
+            logger.error(f"Failed to load configuration from {config_file}: {e}")
+            raise
 
     def calibrate(self) -> None:
         # Trossen Arm robots do not require calibration
