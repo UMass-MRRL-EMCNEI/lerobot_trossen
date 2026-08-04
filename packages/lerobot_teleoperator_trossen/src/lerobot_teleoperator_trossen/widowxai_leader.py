@@ -93,6 +93,24 @@ class WidowXAILeaderTeleop(Teleoperator):
             blocking=True,
         )
 
+    def park(self) -> None:
+        # Move the arms to staged positions for reset environment
+        self.driver.set_all_modes(trossen_arm.Mode.position)
+        self.driver.set_all_positions(
+            self.config.staged_positions,
+            goal_time=2.0,
+            blocking=True,
+        )
+    
+    def unpark(self) -> None:
+        # Set mode to external effort to resume episode recording
+        self.driver.set_all_modes(trossen_arm.Mode.external_effort)
+        self.driver.set_all_external_efforts(
+            [0.0] * len(self.config.joint_names),
+            goal_time=0.0,
+            blocking=True,
+        )
+
     def get_action(self) -> dict[str, float]:
         start = time.perf_counter()
         action = self.driver.get_all_positions()

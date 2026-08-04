@@ -10,6 +10,7 @@ from lerobot_teleoperator_trossen.config_widowxai_leader import (
     WidowXAILeaderTeleopConfig,
 )
 from lerobot_teleoperator_trossen.widowxai_leader import WidowXAILeaderTeleop
+from pkg_resources import non_empty_lines
 
 logger = logging.getLogger(__name__)
 
@@ -80,6 +81,14 @@ class BiWidowXAILeaderRobot(Teleoperator):
         self.left_arm.configure()
         self.right_arm.configure()
 
+    def park(self) -> None:
+        self.left_arm.park()
+        self.right_arm.park()
+
+    def unpark(self) -> None:
+        self.left_arm.unpark()
+        self.right_arm.unpark()
+        
     def get_action(self) -> dict[str, float]:
         action_dict = {}
 
